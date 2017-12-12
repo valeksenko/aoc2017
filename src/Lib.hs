@@ -1,6 +1,7 @@
-module Lib
-    ( someFunc
-    ) where
+module Lib (
+    module D2P1
+  , module D2P2
+) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import D2P1
+import D2P2
