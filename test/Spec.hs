@@ -1,4 +1,5 @@
 import Test.Tasty
+import qualified D1P1Spec
 import qualified D2P1Spec
 import qualified D2P2Spec
 
@@ -8,7 +9,8 @@ main = defaultMain tests
 tests :: TestTree
 tests = testGroup "Tests"
     [
-        D2P1Spec.tests
+        D1P1Spec.tests
+      , D2P1Spec.tests
       , D2P2Spec.tests
 
     ]

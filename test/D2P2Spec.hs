@@ -17,5 +17,5 @@ unitTests :: TestTree
 unitTests = testGroup "Unit tests"
     [
         testCase "divsum: gives correct answer to the original problem" $ do
-            9 @=? D2P2.divsum  [[5, 9, 2, 8], [9, 4, 7, 3], [3, 8, 6, 5]]
+            9 @=? D2P2.divsum [[5, 9, 2, 8], [9, 4, 7, 3], [3, 8, 6, 5]]
     ]
