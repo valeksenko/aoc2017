@@ -7,6 +7,7 @@ module Lib (
   , module D3P2
   , module D4P1
   , module D4P2
+  , module D5P1
 ) where
 
 import qualified D1P1
@@ -18,3 +19,4 @@ import qualified D3P1
 import qualified D3P2
 import qualified D4P1
 import qualified D4P2
+import qualified D5P1
