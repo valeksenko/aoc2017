@@ -18,20 +18,20 @@ go :: Jump -> Int
 go (Jump c o l r)
     |  o > (length r) = c
     | -o > (length l) = c
-    | o == 0          = go $ Jump (c + 1) (o + 1) l r
+    | o == 0          = go $! Jump (c + 1) (o + 1) l r
     | o < 0           =
         let
             (l', (o':r'')) = splitAt (length l + o) l
-            r' =  r'' ++ [o + 1] ++ r
+            r' =  concat [r'', [o + 1], r]
         in
-            go $ Jump (c + 1) o' l' r'
+            go $! Jump (c + 1) o' l' r'
     | otherwise       =
         let
             (l'', (o':r')) = splitAt (o - 1) r
             o'' = if o > 2 then o - 1 else o + 1 
-            l' = l ++ [o''] ++ l''
+            l' = concat [l, [o''], l'']
         in
-            go $ Jump (c + 1) o' l' r'
+            go $! Jump (c + 1) o' l' r'
 
 numsteps :: [Offset] -> Int
 numsteps []     = 0
