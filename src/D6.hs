@@ -1,5 +1,6 @@
-module D6P1 (
+module D6 (
     numcycles
+  , loopsize
 ) where
 
 import Data.List
@@ -15,11 +16,20 @@ membanks l = redistribute n (h ++ [0], t)
         (h, n:t) = span (/= m) l
         m = maximum l
 
-numcycles :: [Int] -> Int
-numcycles = untilDup [] . iterate membanks
+findDup :: [[Int]] -> ([Int], [[Int]])
+findDup = dup []
     where
-        untilDup a (x:xs) = if elem x a then length a else untilDup (x:a) xs 
+        dup a (x:xs) = if elem x a then (x, a) else dup (x:a) xs
 
+numcycles :: [Int] -> Int
+numcycles = length . snd . findDup . iterate membanks
+
+loopsize :: [Int] -> Int
+loopsize l =
+    let
+        dup = fst . findDup $ iterate membanks l
+    in
+        (+1) . length . takeWhile (/= dup) . tail $ iterate membanks dup
 
 {-
 http://adventofcode.com/2017/day/6
@@ -45,4 +55,12 @@ The third bank is chosen, and the same thing happens: 2 4 1 2.
 At this point, we've reached a state we've seen before: 2 4 1 2 was already seen. The infinite loop is detected after the fifth block redistribution cycle, and so the answer in this example is 5.
 
 Given the initial block counts in your puzzle input, how many redistribution cycles must be completed before a configuration is produced that has been seen before?
+
+--- Part Two ---
+
+Out of curiosity, the debugger would also like to know the size of the loop: starting from a state that has already been seen, how many block redistribution cycles must be performed before that same state is seen again?
+
+In the example above, 2 4 1 2 is seen again after four cycles, and so the answer in that example would be 4.
+
+How many cycles are in the infinite loop that arises from the configuration in your puzzle input?
 -}
