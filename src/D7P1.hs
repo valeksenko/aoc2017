@@ -1,6 +1,7 @@
 module D7P1 (
     bottomname
   , Program(..)
+  , Tower(..)
 ) where
 
 import Data.List
